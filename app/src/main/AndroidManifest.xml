@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".main.SignUpActivity" />
-        <activity android:name=".main.CardMenuActivity"/>
+        <activity android:name=".main.CardMenuActivity" />
+        <activity android:name=".main.ChatActivity"></activity>
     </application>
 
 </manifest>

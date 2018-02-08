@@ -13,7 +13,7 @@
         android:layout_weight="1"
         android:textColorHint="#CFD8DC"
         android:textColor="#CFD8DC"
-        android:hint="Write a message"/>
+        android:hint="@string/message_field_hint"/>
 
     <ImageView
         android:id="@+id/selfMessageButton"

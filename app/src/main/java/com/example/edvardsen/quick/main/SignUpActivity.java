@@ -24,6 +24,7 @@ import static com.example.edvardsen.quick.helpers.DefaultValues.JSON;
 public class SignUpActivity extends AppCompatActivity {
 
     Button signUpBtn;
+    EditText signUpUserName;
     EditText signUpEmail;
     EditText signUpPassword;
 
@@ -34,6 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         signUpBtn = (Button) findViewById(R.id.signUpBtn);
+        signUpUserName = (EditText) findViewById(R.id.signUpUserName);
         signUpEmail = (EditText) findViewById(R.id.signUpEmail);
         signUpPassword = (EditText) findViewById(R.id.signUpPassword);
 
@@ -42,13 +44,15 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = signUpEmail.getText().toString();
                 String pass = signUpPassword.getText().toString();
+                String user = signUpUserName.getText().toString();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                     new SignUpActivity.SignUp().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, DefaultValues.rootUrl
                                     + ":"
                                     + DefaultValues.restPort
                                     + "/users/"
                             , email
-                            , pass);
+                            , pass
+                            , user);
                 } else {
                     new SignUpActivity.SignUp().execute(DefaultValues.rootUrl
                                     + ":"
@@ -67,7 +71,8 @@ public class SignUpActivity extends AppCompatActivity {
             Response response = null;
             String postBody = "{\n" +
                     "    \"email\": \"" + params[1] + "\",\n" +
-                    "    \"password\": \"" + params[2] + "\"\n" +
+                    "    \"password\": \"" + params[2] + "\",\n" +
+                    "    \"username\": \"" + params[3] + "\"\n" +
                     "}";
             try {
                 String url = params[0];
@@ -100,7 +105,6 @@ public class SignUpActivity extends AppCompatActivity {
                         Log.i("code", String.valueOf(response.code()));
                         Log.i("header", response.headers().toString());
                         Log.i("body", response.body().string());
-                        Log.i("message", response.message());
                     }
                 }
             }catch (Exception e) {e.printStackTrace();}

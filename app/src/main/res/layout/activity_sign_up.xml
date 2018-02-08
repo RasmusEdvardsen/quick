@@ -15,6 +15,22 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
+        <!-- UserName Label -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textColorHint="@color/colorOutOfFocus">
+            <EditText android:id="@+id/signUpUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/activity_sign_up_username"
+                android:maxLines="1"
+                android:backgroundTint="@color/colorOutOfFocus"/>
+        </android.support.design.widget.TextInputLayout>
+
         <!-- Email Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -26,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="Email"
+                android:hint="@string/activity_sign_up_email"
                 android:maxLines="1"
                 android:backgroundTint="@color/colorOutOfFocus"/>
         </android.support.design.widget.TextInputLayout>
@@ -43,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="Password"
+                android:hint="@string/activity_sign_up_password"
                 android:backgroundTint="@color/colorOutOfFocus"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -54,7 +70,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
-            android:text="Signup"
+            android:text="@string/activity_sign_up_signupbutton"
             android:textColor="@color/colorInFocus"
             android:background="@color/colorPrimary"/>
     </LinearLayout>
