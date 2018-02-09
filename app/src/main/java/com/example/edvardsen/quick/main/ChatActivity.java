@@ -15,6 +15,9 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         String roomType = getIntent().getExtras().getString(DefaultValues.roomType);
+        String clientToCouple = getIntent().getExtras().getString("clientToCouple");
+
         Toast.makeText(getBaseContext(), roomType, Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), clientToCouple, Toast.LENGTH_LONG).show();
     }
 }

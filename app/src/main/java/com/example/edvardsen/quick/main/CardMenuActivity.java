@@ -3,7 +3,9 @@ package com.example.edvardsen.quick.main;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ public class CardMenuActivity extends AppCompatActivity {
 
     private Socket socket;
     RelativeLayout relativeLayout;
+    CardView cardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +38,23 @@ public class CardMenuActivity extends AppCompatActivity {
     }
 
     public void coupleRoom(View v){
-
-        //TODO: EMAIL INPUT --- ASK SERVER FOR ID BY EMAIL
-        Intent intent = new Intent(getBaseContext(), ChatActivity.class);
-        intent.putExtra(DefaultValues.roomType, DefaultValues.roomTypeCouple);
-        startActivity(intent);
+        cardView = (CardView) findViewById(R.id.card_person);
+        final EditText editText = new EditText(this);
+        editText.setId(View.generateViewId());
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: THIS IS GARBAGE CODE!
+                String[] roomNameAndClientToCouple = editText.getText().toString().split(" ");
+                //TODO: VALIDATE ON CLIENTCOUPLE! IF CLIENTCOUPLE IS NOT EMAIL VALIDATED, THEN TRY AGAIN!
+                socket.emit("joinprivate", roomNameAndClientToCouple[0], roomNameAndClientToCouple[1]);
+                Intent intent = new Intent(getBaseContext(), ChatActivity.class);
+                intent.putExtra(DefaultValues.roomType, DefaultValues.roomTypeCouple);
+                intent.putExtra("clientToCouple", roomNameAndClientToCouple[0]);
+                startActivity(intent);
+                //TODO: THIS IS SO EMBARRASSING!
+            }
+        });
+        cardView.addView(editText);
     }
 }
