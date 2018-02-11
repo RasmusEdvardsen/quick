@@ -11,8 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.edvardsen.quick.data.User;
 import com.example.edvardsen.quick.helpers.DefaultValues;
 import com.example.edvardsen.quick.R;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -97,7 +101,11 @@ public class SignUpActivity extends AppCompatActivity {
                     //TODO: SOMETHING WENT WRONG, TRY AGAIN!
                 }else{
                     if(response.code() == 200){
-                        //JSONObject json = new JSONObject(response.body().string());
+                        JSONArray jsonArray = new JSONArray(response.body().string());
+                        JSONObject jsonObject = jsonArray.getJSONObject(0);
+                        User user = User.getInstance();
+                        user.setUserID(jsonObject.getString("_id"));
+                        user.setEmail(jsonObject.getString("email"));
                         Toast.makeText(getBaseContext(), "Success!", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getBaseContext(), CardMenuActivity.class));
                     }else{
