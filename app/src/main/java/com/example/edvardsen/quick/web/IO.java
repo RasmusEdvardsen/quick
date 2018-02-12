@@ -44,7 +44,7 @@ public class IO {
             }
         }
 
-        socket.on("new message", onNewMessage);
+        socket.on("newmessage", onNewMessage);
         socket.on("private", onPrivateMessage);
         socket.connect();
         return socket;
@@ -65,7 +65,6 @@ public class IO {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run(){
-                    Log.i("asd", relativeLayout.toString());
                     createMessage(receivedMsg);
                 }
             });
