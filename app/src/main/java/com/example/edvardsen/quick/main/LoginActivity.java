@@ -3,6 +3,7 @@ package com.example.edvardsen.quick.main;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,7 +34,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.top_bar);
         setContentView(R.layout.activity_login);
 
         button = (Button) findViewById(R.id.loginActBtnLogin);
@@ -105,7 +107,9 @@ public class LoginActivity extends AppCompatActivity {
                         Log.i("rspbody", jsonObject.toString());
                         User user = User.getInstance();
                         user.setUserID(jsonObject.getString("_id"));
+                        user.setUserName(jsonObject.getString("username"));
                         user.setEmail(jsonObject.getString("email"));
+                        //TODO: GET LISTROOMS
                         Toast.makeText(getBaseContext(), "Success!", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getBaseContext(), CardMenuActivity.class));
                     }else{
@@ -113,7 +117,6 @@ public class LoginActivity extends AppCompatActivity {
                         Log.i("code", String.valueOf(response.code()));
                         Log.i("header", response.headers().toString());
                         Log.i("body", response.body().string());
-                        Log.i("message", response.message());
                     }
                 }
             }catch (Exception e) {e.printStackTrace();}

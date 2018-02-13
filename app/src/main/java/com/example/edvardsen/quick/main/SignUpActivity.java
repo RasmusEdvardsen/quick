@@ -3,6 +3,7 @@ package com.example.edvardsen.quick.main;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,7 +36,8 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.top_bar);
         setContentView(R.layout.activity_sign_up);
 
         signUpBtn = (Button) findViewById(R.id.signUpBtn);
@@ -101,11 +103,12 @@ public class SignUpActivity extends AppCompatActivity {
                     //TODO: SOMETHING WENT WRONG, TRY AGAIN!
                 }else{
                     if(response.code() == 200){
-                        JSONArray jsonArray = new JSONArray(response.body().string());
-                        JSONObject jsonObject = jsonArray.getJSONObject(0);
+                        JSONObject jsonObject = new JSONObject(response.body().string());
                         User user = User.getInstance();
                         user.setUserID(jsonObject.getString("_id"));
+                        user.setUserName(jsonObject.getString("username"));
                         user.setEmail(jsonObject.getString("email"));
+                        //TODO: GET LIST ROOMS
                         Toast.makeText(getBaseContext(), "Success!", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getBaseContext(), CardMenuActivity.class));
                     }else{

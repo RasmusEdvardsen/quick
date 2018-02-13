@@ -25,6 +25,7 @@ import io.socket.emitter.Emitter;
 public class IO {
     private static Socket socket = null;
 
+    //TODO: FIX THIS
     private static Activity activity;
     private static RelativeLayout relativeLayout;
 
@@ -33,12 +34,11 @@ public class IO {
     public static Socket getSocket() {
         if (socket == null) {
             try {
-                User user = User.getInstance();
                 socket = io.socket.client.IO.socket(DefaultValues.rootUrl
                         + ":"
                         + DefaultValues.sockPort
                         + "/?uid="
-                        + user.getUserID());
+                        + User.getUserID());
             } catch (URISyntaxException e) {
                 throw new RuntimeException(e);
             }
@@ -48,6 +48,8 @@ public class IO {
         socket.on("private", onPrivateMessage);
         socket.connect();
         return socket;
+
+        //TODO: if user is logged in, and then signs up new account, socket should reconnect.
     }
 
     public static void configureActivity(Activity act) {
@@ -60,11 +62,12 @@ public class IO {
 
     private static Emitter.Listener onNewMessage = new Emitter.Listener() {
         @Override
-        public void call(Object... args) {
+        public void call(final Object... args) {
             final String receivedMsg = args[0].toString();
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run(){
+                    Log.d("onm", receivedMsg);
                     createMessage(receivedMsg);
                 }
             });
@@ -78,7 +81,7 @@ public class IO {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.i("private", rcvdmsg);
+                    Log.d("op", rcvdmsg);
                     createMessage(rcvdmsg);
                 }
             });
@@ -86,7 +89,6 @@ public class IO {
     };
 
     public static void createMessage(String text) {
-
         // TODO: 10/05/2017 Handle only sending notifications when actual message from user!.
         /*if (true) { //!text.startsWith(prependedUserName)
             //HelperMethods.generateNotification(getBaseContext(), prependedUserName, text);
@@ -94,20 +96,19 @@ public class IO {
         }*/
 
         TextView tv = new TextView(activity);
-        //RelativeLayout.LayoutParams tvParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams tvParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         if (v != null) {
-            //tvParams.addRule(RelativeLayout.BELOW, v.getId());
+            tvParams.addRule(RelativeLayout.BELOW, v.getId());
             tv.setId(View.generateViewId());
         } else {
             tv.setId(View.generateViewId());
         }
-        //DER SKAL CENTRERES!
-        //tvParams.topMargin = 20;
+        tvParams.topMargin = 20;
         tv.setGravity(Gravity.CENTER);
         tv.setPadding(20, 20, 20, 20);
         tv.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorPrimary));
         tv.setTextColor(Color.WHITE);
-        //tv.setLayoutParams(tvParams);
+        tv.setLayoutParams(tvParams);
 
         tv.setText(text);
 

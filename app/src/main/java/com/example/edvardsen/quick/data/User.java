@@ -8,9 +8,10 @@ import java.util.ArrayList;
 
 public class User {
     private static User instance = null;
-    private static String userID = "";
-    private static String email = "";
-    private static ArrayList<String> listRooms = new ArrayList<String>();
+    private String userID = "";
+    private String userName = "";
+    private String email = "";
+    private ArrayList<String> listRooms = new ArrayList<String>();
     protected User(){
 
     }
@@ -23,6 +24,9 @@ public class User {
     public static String getUserID(){
         return instance.userID;
     }
+    public static String getUserName(){
+        return instance.userName;
+    }
     public static String getEmail(){
         return instance.email;
     }
@@ -32,6 +36,7 @@ public class User {
     public static void setUserID(String uID){
         instance.userID = uID;
     }
+    public static void setUserName(String userName) { instance.userName = userName; }
     public static void setEmail(String email){
         instance.email = email;
     }

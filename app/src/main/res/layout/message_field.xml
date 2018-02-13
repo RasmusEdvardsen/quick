@@ -7,7 +7,7 @@
     android:orientation="horizontal">
 
     <EditText
-        android:id="@+id/messageFieldMessage"
+        android:id="@+id/message_field_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -16,11 +16,11 @@
         android:hint="@string/message_field_hint"/>
 
     <ImageView
-        android:id="@+id/selfMessageButton"
+        android:id="@+id/message_field_send_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="5"
         android:padding="4dp"
         android:src="@android:drawable/ic_menu_send"
-        android:onClick="selfMessage"/>
+        android:onClick="send_message"/>
 </LinearLayout>
