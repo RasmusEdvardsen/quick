@@ -54,7 +54,7 @@ public class CardMenuActivity extends AppCompatActivity {
                 //TODO: VALIDATE ON CLIENTCOUPLE! IF CLIENTCOUPLE IS NOT EMAIL VALIDATED, THEN TRY AGAIN!
                 socket.emit("privatecreate", roomNameAndClientToCouple[0], roomNameAndClientToCouple[1]);
                 Intent intent = new Intent(getBaseContext(), ChatActivity.class);
-                intent.putExtra(DefaultValues.roomType, DefaultValues.roomTypeCouple);
+                intent.putExtra(DefaultValues.roomType, DefaultValues.roomTypePrivate);
                 intent.putExtra("clientToCouple", roomNameAndClientToCouple[0]);
                 startActivity(intent);
                 //TODO: THIS IS SO EMBARRASSING!

@@ -50,7 +50,7 @@ public class ChatActivity extends AppCompatActivity {
             message.setText("");
             message.setHint("Write a message");
             try {
-                socket.emit("newmessage", User.getUserName(), msg);
+                socket.emit("privatemessage", User.getUserName(), msg);
             } catch (Exception e) {
                 e.printStackTrace();
             }

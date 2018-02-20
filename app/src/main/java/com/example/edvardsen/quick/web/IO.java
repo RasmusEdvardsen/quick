@@ -46,6 +46,8 @@ public class IO {
 
         socket.on("newmessage", onNewMessage);
         socket.on("private", onPrivateMessage);
+        //socket.on("newroom", onNewRoom);
+        //socket.on("userRooms", onUserRooms);
         socket.connect();
         return socket;
 
