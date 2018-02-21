@@ -83,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                if(response == null) return null;
                 jsonArray = new JSONArray(response.body().string());
             }catch (Exception e){
                 //TODO: log
@@ -91,8 +92,8 @@ public class LoginActivity extends AppCompatActivity {
             if(response.code() == 200){
                 return jsonArray;
             }
-            Toast.makeText(getBaseContext(), "Something went wrong.", Toast.LENGTH_SHORT).show();
-            Log.i("code", String.valueOf(response.code()));
+            /*Toast.makeText(getBaseContext(), "Something went wrong.", Toast.LENGTH_SHORT).show();
+            Log.i("code", String.valueOf(response.code()));*/
             return null;
         }
 
@@ -101,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute(jsonArray);
             try{
                 if(jsonArray == null){
+                    Toast.makeText(getBaseContext(), "Something went wrong.", Toast.LENGTH_SHORT).show();
                     //TODO: SOMETHING WENT WRONG, TRY AGAIN!
                 }else{
                     JSONObject jsonObject = jsonArray.getJSONObject(0);

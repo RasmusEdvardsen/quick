@@ -12,6 +12,7 @@ public class User {
     private String userName = "";
     private String email = "";
     private ArrayList<String> listRooms = new ArrayList<String>();
+    private String currentRoom = "";
     protected User(){
 
     }
@@ -21,9 +22,7 @@ public class User {
         }
         return instance;
     }
-    public static String getUserID(){
-        return instance.userID;
-    }
+    public static String getUserID(){ return instance.userID; }
     public static String getUserName(){
         return instance.userName;
     }
@@ -33,6 +32,7 @@ public class User {
     public static ArrayList<String> getListRooms(){
         return instance.listRooms;
     }
+    public static String getCurrentRoom(){ return instance.currentRoom; }
     public static void setUserID(String uID){
         instance.userID = uID;
     }
@@ -40,8 +40,8 @@ public class User {
     public static void setEmail(String email){
         instance.email = email;
     }
-    //Probably need way more here -- like add/delete/deleteall, etc.
     public static void setListRooms(ArrayList<String> roomList){
         instance.listRooms = roomList;
     }
+    public static void setCurrentRoom(String currentRoom){ instance.currentRoom = currentRoom; }
 }

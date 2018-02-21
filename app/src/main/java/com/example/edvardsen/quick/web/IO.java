@@ -48,9 +48,9 @@ public class IO {
         }
 
         socket.on("newmessage", onNewMessage);
-        socket.on("private", onPrivateMessage);
+        socket.on("privatemessage", onPrivateMessage);
         socket.on("userrooms", onUserRooms);
-        //socket.on("newroom", onNewRoom);
+        socket.on("newroom", onNewRoom);
         //socket.on("userRooms", onUserRooms);
         socket.connect();
         return socket;
@@ -73,7 +73,7 @@ public class IO {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run(){
-                    Log.d("onm", receivedMsg);
+                    Log.d("onnewmessage", receivedMsg);
                     createMessage(receivedMsg);
                 }
             });
@@ -87,7 +87,7 @@ public class IO {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.d("op", rcvdmsg);
+                    Log.d("onprivatemessage", rcvdmsg);
                     createMessage(rcvdmsg);
                 }
             });
@@ -101,8 +101,22 @@ public class IO {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.d("onuserroom", rooms);
+                    Log.d("onuserrooms", rooms);
                     //createMessage(rcvdmsg);
+                }
+            });
+        }
+    };
+
+    private static Emitter.Listener onNewRoom = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            final String room = args[0].toString();
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d("onnewroom", room);
+                    User.getInstance().setCurrentRoom(room);
                 }
             });
         }
