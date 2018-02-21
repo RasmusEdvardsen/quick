@@ -5,12 +5,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.edvardsen.quick.data.User;
 import com.example.edvardsen.quick.R;
@@ -35,14 +33,15 @@ public class CardMenuActivity extends AppCompatActivity {
 
         User.getInstance();
 
-        relativeLayout = (RelativeLayout) findViewById(R.id.testrl);
+        relativeLayout = findViewById(R.id.testrl);
         IO.configureActivity(this);
         IO.configureLayout(relativeLayout);
         socket = IO.getSocket();
+        socket.emit("getuserrooms");
     }
 
     public void couple_room(View v){
-        cardView = (CardView) findViewById(R.id.card_person);
+        cardView = findViewById(R.id.card_person);
         final EditText editText = new EditText(this);
         final TextView textView = findViewById(R.id.card_person_text);
         editText.setId(View.generateViewId());

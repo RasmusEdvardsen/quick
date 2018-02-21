@@ -40,10 +40,10 @@ public class SignUpActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.top_bar);
         setContentView(R.layout.activity_sign_up);
 
-        signUpBtn = (Button) findViewById(R.id.signUpBtn);
-        signUpUserName = (EditText) findViewById(R.id.signUpUserName);
-        signUpEmail = (EditText) findViewById(R.id.signUpEmail);
-        signUpPassword = (EditText) findViewById(R.id.signUpPassword);
+        signUpBtn = findViewById(R.id.signUpBtn);
+        signUpUserName = findViewById(R.id.signUpUserName);
+        signUpEmail = findViewById(R.id.signUpEmail);
+        signUpPassword = findViewById(R.id.signUpPassword);
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override

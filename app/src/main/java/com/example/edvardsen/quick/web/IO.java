@@ -46,6 +46,7 @@ public class IO {
 
         socket.on("newmessage", onNewMessage);
         socket.on("private", onPrivateMessage);
+        socket.on("userrooms", onUserRooms);
         //socket.on("newroom", onNewRoom);
         //socket.on("userRooms", onUserRooms);
         socket.connect();
@@ -85,6 +86,20 @@ public class IO {
                 public void run() {
                     Log.d("op", rcvdmsg);
                     createMessage(rcvdmsg);
+                }
+            });
+        }
+    };
+
+    private static Emitter.Listener onUserRooms = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            final String[] rooms = (String[]) args[0];
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d("op", rooms.toString());
+                    //createMessage(rcvdmsg);
                 }
             });
         }

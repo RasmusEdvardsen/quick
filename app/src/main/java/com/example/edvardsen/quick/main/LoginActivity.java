@@ -38,10 +38,10 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.top_bar);
         setContentView(R.layout.activity_login);
 
-        button = (Button) findViewById(R.id.loginActBtnLogin);
-        tv = (TextView) findViewById(R.id.loginActLinkSignup);
-        etEmail = (EditText) findViewById(R.id.loginEmail);
-        etPassword = (EditText) findViewById(R.id.loginPassword);
+        button = findViewById(R.id.loginActBtnLogin);
+        tv = findViewById(R.id.loginActLinkSignup);
+        etEmail = findViewById(R.id.loginEmail);
+        etPassword = findViewById(R.id.loginPassword);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
