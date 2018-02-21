@@ -37,7 +37,7 @@ public class CardMenuActivity extends AppCompatActivity {
         IO.configureActivity(this);
         IO.configureLayout(relativeLayout);
         socket = IO.getSocket();
-        socket.emit("getuserrooms");
+        socket.emit("getuserrooms", User.getUserID());
     }
 
     public void couple_room(View v){

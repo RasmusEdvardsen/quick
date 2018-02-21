@@ -48,23 +48,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = etEmail.getText().toString();
                 String pass = etPassword.getText().toString();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    new AuthAndRetrieve().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, DefaultValues.rootUrl
-                            + ":"
-                            + DefaultValues.restPort
-                            + "/users/?email="
-                            + email
-                            + "&password="
-                            + pass);
-                } else {
-                    new AuthAndRetrieve().execute(DefaultValues.rootUrl
-                            + ":"
-                            + DefaultValues.restPort
-                            + "/users/?email="
-                            + email
-                            + "&password="
-                            + pass);
-                }
+                new AuthAndRetrieve().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, DefaultValues.rootUrl
+                        + ":"
+                        + DefaultValues.restPort
+                        + "/users/?email="
+                        + email
+                        + "&password="
+                        + pass);
             }
         });
 

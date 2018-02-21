@@ -13,6 +13,9 @@ import com.example.edvardsen.quick.data.User;
 import com.example.edvardsen.quick.helpers.DefaultValues;
 import com.example.edvardsen.quick.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.net.URISyntaxException;
 
 import io.socket.client.Socket;
@@ -94,11 +97,11 @@ public class IO {
     private static Emitter.Listener onUserRooms = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            final String[] rooms = (String[]) args[0];
+            final String rooms = args[0].toString();
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.d("op", rooms.toString());
+                    Log.d("onuserroom", rooms);
                     //createMessage(rcvdmsg);
                 }
             });
