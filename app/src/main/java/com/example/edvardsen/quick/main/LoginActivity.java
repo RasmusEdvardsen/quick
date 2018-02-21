@@ -67,47 +67,51 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public class AuthAndRetrieve extends AsyncTask<String, Void, Response> {
+    public class AuthAndRetrieve extends AsyncTask<String, Void, JSONArray> {
         @Override
-        protected Response doInBackground(String... params) {
+        protected JSONArray doInBackground(String... params) {
+            JSONArray jsonArray = null;
             Response response = null;
-            try {
-                String url = params[0];
-                OkHttpClient client = new OkHttpClient();
-                Request request = new Request.Builder()
-                        .url(url)
-                        .build();
-                response = client.newCall(request).execute();
-            } catch (Exception e) {
-                e.printStackTrace();
+            try{
+                try {
+                    String url = params[0];
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url(url)
+                            .build();
+                    response = client.newCall(request).execute();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                jsonArray = new JSONArray(response.body().string());
+            }catch (Exception e){
+                //TODO: log
+                Log.e("loginauthbg", e.toString());
             }
-            return response;
+            if(response.code() == 200){
+                return jsonArray;
+            }
+            Toast.makeText(getBaseContext(), "Something went wrong.", Toast.LENGTH_SHORT).show();
+            Log.i("code", String.valueOf(response.code()));
+            return null;
         }
 
         @Override
-        protected void onPostExecute(Response response) {
-            super.onPostExecute(response);
+        protected void onPostExecute(JSONArray jsonArray) {
+            super.onPostExecute(jsonArray);
             try{
-                if(response == null){
+                if(jsonArray == null){
                     //TODO: SOMETHING WENT WRONG, TRY AGAIN!
                 }else{
-                    if(response.code() == 200){
-                        JSONArray jsonArray = new JSONArray(response.body().string());
-                        JSONObject jsonObject = jsonArray.getJSONObject(0);
-                        Log.i("rspbody", jsonObject.toString());
-                        User user = User.getInstance();
-                        user.setUserID(jsonObject.getString("_id"));
-                        user.setUserName(jsonObject.getString("username"));
-                        user.setEmail(jsonObject.getString("email"));
-                        //TODO: GET LISTROOMS
-                        Toast.makeText(getBaseContext(), "Success!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getBaseContext(), CardMenuActivity.class));
-                    }else{
-                        Toast.makeText(getBaseContext(), "Something went wrong.", Toast.LENGTH_SHORT).show();
-                        Log.i("code", String.valueOf(response.code()));
-                        Log.i("header", response.headers().toString());
-                        Log.i("body", response.body().string());
-                    }
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    Log.i("rspbody", jsonObject.toString());
+                    User user = User.getInstance();
+                    user.setUserID(jsonObject.getString("_id"));
+                    user.setUserName(jsonObject.getString("username"));
+                    user.setEmail(jsonObject.getString("email"));
+                    //TODO: GET LISTROOMS
+                    Toast.makeText(getBaseContext(), "Success!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getBaseContext(), CardMenuActivity.class));
                 }
             }catch (Exception e) {e.printStackTrace();}
         }
