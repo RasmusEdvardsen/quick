@@ -42,17 +42,16 @@ public class IO {
                         + DefaultValues.sockPort
                         + "/?uid="
                         + User.getUserID());
+                socket.on("newmessage", onNewMessage);
+                socket.on("privatemessage", onPrivateMessage);
+                socket.on("userrooms", onUserRooms);
+                socket.on("newroom", onNewRoom);
+                //socket.on("userRooms", onUserRooms);
+                socket.connect();
             } catch (URISyntaxException e) {
                 throw new RuntimeException(e);
             }
         }
-
-        socket.on("newmessage", onNewMessage);
-        socket.on("privatemessage", onPrivateMessage);
-        socket.on("userrooms", onUserRooms);
-        socket.on("newroom", onNewRoom);
-        //socket.on("userRooms", onUserRooms);
-        socket.connect();
         return socket;
 
         //TODO: if user is logged in, and then signs up new account, socket should reconnect.
