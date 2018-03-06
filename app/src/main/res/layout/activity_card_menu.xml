@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/testrl"
+    android:id="@+id/card_outer_relative_layout"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -20,11 +20,8 @@
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_horizontal_margin"
                 android:onClick="couple_room"
-                card_view:cardElevation="10dp"
-                card_view:cardBackgroundColor="@color/colorPrimaryLight"
-                card_view:cardCornerRadius="4dp">
+                card_view:cardBackgroundColor="@color/colorPrimaryLight">
                 <TextView
                     android:id="@+id/card_person_text"
                     android:layout_width="match_parent"
@@ -33,16 +30,19 @@
                     android:textAlignment="center"
                     android:text="@string/card_person"/>
             </android.support.v7.widget.CardView>
+            <RelativeLayout
+                android:id="@+id/card_inner_person_relative_layout"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+            </RelativeLayout>
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/card_private"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                card_view:cardElevation="10dp"
-                card_view:cardBackgroundColor="@color/colorPrimaryLight"
-                card_view:cardCornerRadius="4dp">
+                card_view:cardBackgroundColor="@color/colorPrimaryLight">
                 <TextView
                     android:id="@+id/card_private_text"
                     android:layout_width="match_parent"
@@ -57,10 +57,7 @@
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                card_view:cardElevation="10dp"
-                card_view:cardBackgroundColor="@color/colorPrimaryLight"
-                card_view:cardCornerRadius="4dp">
+                card_view:cardBackgroundColor="@color/colorPrimaryLight">
                 <TextView
                     android:id="@+id/card_public_text"
                     android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,8 +32,10 @@ public class IO {
     //TODO: FIX THIS
     private static Activity activity;
     private static RelativeLayout relativeLayout;
+    private static RelativeLayout personRelativeLayout;
 
     private static View v = null;
+    private static View view = null;
 
     public static Socket getSocket() {
         if (socket == null) {
@@ -63,6 +66,10 @@ public class IO {
 
     public static void configureLayout(RelativeLayout layout) {
         relativeLayout = layout;
+    }
+
+    public static void configurePrivateRoomLayout(RelativeLayout layout) {
+        personRelativeLayout = layout;
     }
 
     private static Emitter.Listener onNewMessage = new Emitter.Listener() {
@@ -101,7 +108,7 @@ public class IO {
                 @Override
                 public void run() {
                     Log.d("onuserrooms", rooms);
-                    //createMessage(rcvdmsg);
+                    setRooms(rooms);
                 }
             });
         }
@@ -115,13 +122,33 @@ public class IO {
                 @Override
                 public void run() {
                     Log.d("onnewroom", room);
-                    User.getInstance().setCurrentRoom(room);
+                    User.setCurrentRoom(room);
                 }
             });
         }
     };
 
-    public static void createMessage(String text) {
+    private static void setRooms(String rooms){
+        TextView tv = new TextView(activity);
+        RelativeLayout.LayoutParams tvParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        if (view != null) {
+            tvParams.addRule(RelativeLayout.BELOW, view.getId());
+            tv.setId(View.generateViewId());
+        } else {
+
+            tv.setId(View.generateViewId());
+        }
+        tv.setGravity(Gravity.CENTER);
+        tv.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorWhite));
+        tv.setLayoutParams(tvParams);
+
+        tv.setText(rooms);
+
+        view = tv;
+        personRelativeLayout.addView(tv);
+    }
+
+    private static void createMessage(String text) {
         // TODO: 10/05/2017 Handle only sending notifications when actual message from user!.
         /*if (true) { //!text.startsWith(prependedUserName)
             //HelperMethods.generateNotification(getBaseContext(), prependedUserName, text);

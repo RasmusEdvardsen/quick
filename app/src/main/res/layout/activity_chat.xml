@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_weight="20"
         android:layout_height="wrap_content">
-
         <RelativeLayout
             android:id="@+id/activity_chat_relativelayout"
             android:layout_width="match_parent"

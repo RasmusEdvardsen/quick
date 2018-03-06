@@ -22,6 +22,7 @@ public class CardMenuActivity extends AppCompatActivity {
 
     private Socket socket;
     RelativeLayout relativeLayout;
+    private static RelativeLayout personRelativeLayout;
     CardView cardView;
 
     @Override
@@ -33,9 +34,11 @@ public class CardMenuActivity extends AppCompatActivity {
 
         User.getInstance();
 
-        relativeLayout = findViewById(R.id.testrl);
+        relativeLayout = findViewById(R.id.card_outer_relative_layout);
+        personRelativeLayout = findViewById(R.id.card_inner_person_relative_layout);
         IO.configureActivity(this);
         IO.configureLayout(relativeLayout);
+        IO.configurePrivateRoomLayout(personRelativeLayout);
         socket = IO.getSocket();
         socket.emit("getuserrooms", User.getUserID());
     }
