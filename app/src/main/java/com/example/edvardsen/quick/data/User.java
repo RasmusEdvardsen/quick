@@ -1,6 +1,7 @@
 package com.example.edvardsen.quick.data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by buller on 17/01/2018.
@@ -11,7 +12,7 @@ public class User {
     private String userID = "";
     private String userName = "";
     private String email = "";
-    private ArrayList<String> listRooms = new ArrayList<String>();
+    private List<String> listRooms = new ArrayList<String>();
     private String currentRoom = "";
     protected User(){
 
@@ -29,7 +30,7 @@ public class User {
     public static String getEmail(){
         return instance.email;
     }
-    public static ArrayList<String> getListRooms(){
+    public static List<String> getListRooms(){
         return instance.listRooms;
     }
     public static String getCurrentRoom(){ return instance.currentRoom; }
@@ -40,7 +41,7 @@ public class User {
     public static void setEmail(String email){
         instance.email = email;
     }
-    public static void setListRooms(ArrayList<String> roomList){
+    public static void setListRooms(List<String> roomList){
         instance.listRooms = roomList;
     }
     public static void setCurrentRoom(String currentRoom){ instance.currentRoom = currentRoom; }

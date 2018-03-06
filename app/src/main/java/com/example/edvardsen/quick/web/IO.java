@@ -1,6 +1,7 @@
 package com.example.edvardsen.quick.web;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -13,12 +14,16 @@ import android.widget.TextView;
 import com.example.edvardsen.quick.data.User;
 import com.example.edvardsen.quick.helpers.DefaultValues;
 import com.example.edvardsen.quick.R;
+import com.example.edvardsen.quick.main.CardMenuActivity;
+import com.example.edvardsen.quick.main.ChatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
@@ -110,6 +115,7 @@ public class IO {
                 public void run() {
                     String[] roomsList = rooms.replaceAll("\\[", "").replaceAll("\\]","").replaceAll("\"","").split(",");
                     Log.d("onuserrooms", rooms);
+                    User.setListRooms(Arrays.asList(roomsList));
                     setRooms(roomsList);
                 }
             });
@@ -138,15 +144,22 @@ public class IO {
                 tvParams.addRule(RelativeLayout.BELOW, view.getId());
                 tv.setId(View.generateViewId());
             } else {
-
                 tv.setId(View.generateViewId());
             }
             tv.setGravity(Gravity.CENTER);
             tv.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorWhite));
             tv.setLayoutParams(tvParams);
-
-            tv.setText(rooms[i].toString());
-
+            final String room = rooms[i];
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    IO.getSocket().emit("privatejoin", room);
+                    Intent intent = new Intent(view.getContext(), ChatActivity.class);
+                    intent.putExtra(DefaultValues.roomType, DefaultValues.roomTypePrivate);
+                    view.getContext().startActivity(intent);
+                }
+            });
+            tv.setText(rooms[i]);
             view = tv;
             personRelativeLayout.addView(tv);
         }
