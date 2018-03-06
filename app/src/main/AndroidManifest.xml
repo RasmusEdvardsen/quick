@@ -11,16 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.LoginActivity">
+        <activity android:name=".main.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.SignUpActivity" />
-        <activity android:name=".main.CardMenuActivity" />
-        <activity android:name=".main.ChatActivity"></activity>
+        <activity android:name=".main.SignUpActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".main.CardMenuActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".main.ChatActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -16,6 +16,7 @@ import com.example.edvardsen.quick.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 
@@ -102,13 +103,14 @@ public class IO {
 
     private static Emitter.Listener onUserRooms = new Emitter.Listener() {
         @Override
-        public void call(Object... args) {
+        public void call(final Object... args) {
             final String rooms = args[0].toString();
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    String[] roomsList = rooms.replaceAll("\\[", "").replaceAll("\\]","").replaceAll("\"","").split(",");
                     Log.d("onuserrooms", rooms);
-                    setRooms(rooms);
+                    setRooms(roomsList);
                 }
             });
         }
@@ -128,24 +130,26 @@ public class IO {
         }
     };
 
-    private static void setRooms(String rooms){
-        TextView tv = new TextView(activity);
-        RelativeLayout.LayoutParams tvParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        if (view != null) {
-            tvParams.addRule(RelativeLayout.BELOW, view.getId());
-            tv.setId(View.generateViewId());
-        } else {
+    private static void setRooms(String[] rooms){
+        for (int i = 0; i < rooms.length; i++) {
+            TextView tv = new TextView(activity);
+            RelativeLayout.LayoutParams tvParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            if (view != null) {
+                tvParams.addRule(RelativeLayout.BELOW, view.getId());
+                tv.setId(View.generateViewId());
+            } else {
 
-            tv.setId(View.generateViewId());
+                tv.setId(View.generateViewId());
+            }
+            tv.setGravity(Gravity.CENTER);
+            tv.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorWhite));
+            tv.setLayoutParams(tvParams);
+
+            tv.setText(rooms[i].toString());
+
+            view = tv;
+            personRelativeLayout.addView(tv);
         }
-        tv.setGravity(Gravity.CENTER);
-        tv.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorWhite));
-        tv.setLayoutParams(tvParams);
-
-        tv.setText(rooms);
-
-        view = tv;
-        personRelativeLayout.addView(tv);
     }
 
     private static void createMessage(String text) {
