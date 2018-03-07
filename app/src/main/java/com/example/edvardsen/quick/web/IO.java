@@ -153,7 +153,7 @@ public class IO {
             tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    IO.getSocket().emit("privatejoin", room);
+                    IO.getSocket().emit("privateenter", room);
                     Intent intent = new Intent(view.getContext(), ChatActivity.class);
                     intent.putExtra(DefaultValues.roomType, DefaultValues.roomTypePrivate);
                     view.getContext().startActivity(intent);
