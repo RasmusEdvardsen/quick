@@ -24,10 +24,12 @@ public class ChatActivity extends AppCompatActivity {
     ScrollView scrollView;
     EditText message;
     ImageView sendmessage;
+    String currRoomId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("testtest", "onCreate");
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.top_bar);
         setContentView(R.layout.activity_chat);
@@ -41,6 +43,26 @@ public class ChatActivity extends AppCompatActivity {
         IO.configureActivity(this);
         IO.configureLayout(relativeLayout);
         socket = IO.getSocket();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Log.i("testtest", "onPause");
+        IO.getSocket().emit("privateexit", User.getCurrentRoom());
+        currRoomId = User.getCurrentRoom();
+        User.setCurrentRoom("");
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.i("testtest", "onResume " + currRoomId);
+        if (!currRoomId.isEmpty()){
+            IO.getSocket().emit("privateenter", currRoomId);
+            User.setCurrentRoom(currRoomId);
+            currRoomId = "";
+        }
     }
 
     public void send_message(View v) {
