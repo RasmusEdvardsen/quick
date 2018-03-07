@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_outer_relative_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/card_menu_linear_layout_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
@@ -32,10 +33,27 @@
             android:onClick="show_public_rooms"/>
     </android.support.v7.widget.LinearLayoutCompat>
 
-    <FrameLayout
-        android:id="@+id/card_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </FrameLayout>
 
-</LinearLayout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_below="@id/card_menu_linear_layout_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/cardMenuScrollView">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/card_inner_person_relative_layout"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

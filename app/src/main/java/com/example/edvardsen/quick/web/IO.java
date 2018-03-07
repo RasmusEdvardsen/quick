@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -165,7 +166,6 @@ public class IO {
             //HelperMethods.generateNotification(getBaseContext(), prependedUserName, text);
             HelperMethods.generateNotification(getBaseContext(), text);
         }*/
-
         TextView tv = new TextView(activity);
         RelativeLayout.LayoutParams tvParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         if (v != null) {
