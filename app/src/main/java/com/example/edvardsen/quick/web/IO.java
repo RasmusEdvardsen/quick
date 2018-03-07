@@ -7,22 +7,15 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.edvardsen.quick.data.User;
 import com.example.edvardsen.quick.helpers.DefaultValues;
 import com.example.edvardsen.quick.R;
-import com.example.edvardsen.quick.main.CardMenuActivity;
-import com.example.edvardsen.quick.main.ChatActivity;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.edvardsen.quick.activities.ChatActivity;
 
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import io.socket.client.Socket;

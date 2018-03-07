@@ -1,72 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:id="@+id/card_outer_relative_layout"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/cardMenuScrollView">
-        <LinearLayout
-            android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_person"
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="couple_room"
-                card_view:cardBackgroundColor="@color/colorPrimaryLight">
-                <TextView
-                    android:id="@+id/card_person_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="60sp"
-                    android:textAlignment="center"
-                    android:text="@string/card_person"/>
-            </android.support.v7.widget.CardView>
-            <RelativeLayout
-                android:id="@+id/card_inner_person_relative_layout"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                xmlns:android="http://schemas.android.com/apk/res/android">
-            </RelativeLayout>
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_private"
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                card_view:cardBackgroundColor="@color/colorPrimaryLight">
-                <TextView
-                    android:id="@+id/card_private_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="60sp"
-                    android:textAlignment="center"
-                    android:text="@string/card_private"/>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/card_public"
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                card_view:cardBackgroundColor="@color/colorPrimaryLight">
-                <TextView
-                    android:id="@+id/card_public_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="60sp"
-                    android:textAlignment="center"
-                    android:text="@string/card_public"/>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-    </ScrollView>
+            android:text="@string/activity_card_menu_private"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
+            android:onClick="show_private_rooms"/>
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark" />
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_card_menu_public"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
+            android:onClick="show_public_rooms"/>
+    </android.support.v7.widget.LinearLayoutCompat>
 
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/card_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </FrameLayout>
+
+</LinearLayout>

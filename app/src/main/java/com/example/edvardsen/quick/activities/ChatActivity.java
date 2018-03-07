@@ -1,4 +1,4 @@
-package com.example.edvardsen.quick.main;
+package com.example.edvardsen.quick.activities;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.edvardsen.quick.R;
 import com.example.edvardsen.quick.data.User;
-import com.example.edvardsen.quick.helpers.DefaultValues;
 import com.example.edvardsen.quick.web.IO;
 import io.socket.client.Socket;
 
@@ -30,8 +29,6 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("testtest", "onCreate");
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.top_bar);
         setContentView(R.layout.activity_chat);
 
         User.getInstance();

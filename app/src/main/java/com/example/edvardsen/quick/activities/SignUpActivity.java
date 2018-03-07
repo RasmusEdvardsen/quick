@@ -1,4 +1,4 @@
-package com.example.edvardsen.quick.main;
+package com.example.edvardsen.quick.activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -16,7 +16,6 @@ import com.example.edvardsen.quick.data.User;
 import com.example.edvardsen.quick.helpers.DefaultValues;
 import com.example.edvardsen.quick.R;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import okhttp3.OkHttpClient;
@@ -36,8 +35,6 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.top_bar);
         setContentView(R.layout.activity_sign_up);
 
         signUpBtn = findViewById(R.id.signUpBtn);

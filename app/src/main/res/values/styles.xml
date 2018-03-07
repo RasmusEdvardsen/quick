@@ -8,4 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CardTheme" parent="Base.CardView">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="cardElevation">2sp</item>
+        <item name="cardCornerRadius">2sp</item>
+        <item name="cardBackgroundColor">@color/colorPrimaryLight</item>
+    </style>
+
 </resources>

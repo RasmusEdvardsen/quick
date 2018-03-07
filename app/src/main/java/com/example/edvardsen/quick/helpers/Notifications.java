@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.NotificationCompat;
 
-import com.example.edvardsen.quick.main.CardMenuActivity;
+import com.example.edvardsen.quick.activities.CardMenuActivity;
 import com.example.edvardsen.quick.R;
 
 /**

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorInFocus"
     android:orientation="vertical"
-    tools:context="com.example.edvardsen.quick.main.CardMenuActivity">
+    tools:context="com.example.edvardsen.quick.activities.CardMenuActivity">
 
     <ScrollView
         android:id="@+id/activity_chat_scrollview"
