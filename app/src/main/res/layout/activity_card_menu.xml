@@ -33,26 +33,19 @@
             android:onClick="show_public_rooms"/>
     </android.support.v7.widget.LinearLayoutCompat>
 
-
-
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_below="@id/card_menu_linear_layout_toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/cardMenuScrollView">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/card_inner_person_relative_layout"
+                android:id="@+id/card_menu_relative_layout"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 xmlns:android="http://schemas.android.com/apk/res/android">
-            </RelativeLayout>
 
-        </LinearLayout>
+            </RelativeLayout>
 
     </ScrollView>
 

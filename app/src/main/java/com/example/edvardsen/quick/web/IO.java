@@ -1,20 +1,22 @@
 package com.example.edvardsen.quick.web;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.edvardsen.quick.data.User;
 import com.example.edvardsen.quick.helpers.DefaultValues;
 import com.example.edvardsen.quick.R;
-import com.example.edvardsen.quick.activities.ChatActivity;
+
+import org.w3c.dom.Text;
 
 import java.net.URISyntaxException;
 import java.util.Arrays;
@@ -31,8 +33,8 @@ public class IO {
 
     //TODO: FIX THIS
     private static Activity activity;
-    private static RelativeLayout relativeLayout;
-    private static RelativeLayout personRelativeLayout;
+    private static RelativeLayout outerLayout;
+    private static RelativeLayout cardMenuLayout;
 
     private static View v = null;
     private static View view = null;
@@ -64,12 +66,12 @@ public class IO {
         activity = act;
     }
 
-    public static void configureLayout(RelativeLayout layout) {
-        relativeLayout = layout;
+    public static void configureOuterLayout(RelativeLayout layout) {
+        outerLayout = layout;
     }
 
-    public static void configurePrivateRoomLayout(RelativeLayout layout) {
-        personRelativeLayout = layout;
+    public static void configureCardMenuLayout(RelativeLayout layout) {
+        cardMenuLayout = layout;
     }
 
     private static Emitter.Listener onNewMessage = new Emitter.Listener() {
@@ -132,31 +134,23 @@ public class IO {
 
     private static void setRooms(String[] rooms){
         for (int i = 0; i < rooms.length; i++) {
-            TextView tv = new TextView(activity);
-            RelativeLayout.LayoutParams tvParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            LayoutInflater inflater = LayoutInflater.from(activity);
+            CardView cardView = (CardView) inflater.inflate(R.layout.card_view, null, false);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             if (view != null) {
-                tvParams.addRule(RelativeLayout.BELOW, view.getId());
-                tv.setId(View.generateViewId());
+                params.addRule(RelativeLayout.BELOW, view.getId());
+                cardView.setId(View.generateViewId());
             } else {
-                tv.setId(View.generateViewId());
+                cardView.setId(View.generateViewId());
             }
-            tv.setGravity(Gravity.CENTER);
-            tv.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorWhite));
-            tv.setLayoutParams(tvParams);
-            final String room = rooms[i];
-            tv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    User.setCurrentRoom(room);
-                    IO.getSocket().emit("privateenter", User.getCurrentRoom());
-                    Intent intent = new Intent(view.getContext(), ChatActivity.class);
-                    intent.putExtra(DefaultValues.roomType, DefaultValues.roomTypePrivate);
-                    view.getContext().startActivity(intent);
-                }
-            });
-            tv.setText(rooms[i]);
-            view = tv;
-            personRelativeLayout.addView(tv);
+            View child = cardView.getChildAt(0);
+            ViewGroup cardChildren = (ViewGroup) child;
+            TextView textView = (TextView) cardChildren.getChildAt(0);
+            textView.setText(rooms[i]);
+            params.setMargins(8, 8, 8, 8);
+            cardView.setLayoutParams(params);
+            cardMenuLayout.addView(cardView);
+            view = cardView;
         }
     }
 
@@ -184,6 +178,6 @@ public class IO {
         tv.setText(text);
 
         v = tv;
-        relativeLayout.addView(tv);
+        outerLayout.addView(tv);
     }
 }

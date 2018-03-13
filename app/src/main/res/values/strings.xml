@@ -17,6 +17,10 @@
     <string name="activity_card_menu_private">Private</string>
     <string name="activity_card_menu_public">Public</string>
 
+    <string name="card_menu_title_text_view">card_menu_title_text_view</string>
+    <string name="card_menu_content_text_view">card_menu_content_text_view</string>
+    <string name="card_menu_delete_button">card_menu_delete_button</string>
+
     <string name="message_field_hint">Write a message</string>
 
     <!-- TODO: Remove or change this placeholder text -->

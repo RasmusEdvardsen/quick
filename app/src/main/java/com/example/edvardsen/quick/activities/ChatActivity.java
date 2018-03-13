@@ -1,6 +1,5 @@
 package com.example.edvardsen.quick.activities;
 
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,7 +37,7 @@ public class ChatActivity extends AppCompatActivity {
         message = findViewById(R.id.message_field_message);
         sendmessage = findViewById(R.id.message_field_send_message);
         IO.configureActivity(this);
-        IO.configureLayout(relativeLayout);
+        IO.configureOuterLayout(relativeLayout);
         socket = IO.getSocket();
     }
 
