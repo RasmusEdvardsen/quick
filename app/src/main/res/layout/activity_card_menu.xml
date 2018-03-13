@@ -49,4 +49,27 @@
 
     </ScrollView>
 
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true">
+        <EditText
+            android:id="@+id/message_field_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColorHint="#CFD8DC"
+            android:textColor="#CFD8DC"
+            android:hint="roomname@otherclient"/>
+
+        <ImageView
+            android:id="@+id/message_field_send_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:padding="4dp"
+            android:src="@android:drawable/ic_menu_send"/>
+    </android.support.v7.widget.LinearLayoutCompat>
+
 </RelativeLayout>
