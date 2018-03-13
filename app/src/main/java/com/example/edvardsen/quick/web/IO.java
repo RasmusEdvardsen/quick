@@ -1,7 +1,9 @@
 package com.example.edvardsen.quick.web;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -9,9 +11,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.edvardsen.quick.activities.ChatActivity;
 import com.example.edvardsen.quick.data.User;
 import com.example.edvardsen.quick.helpers.DefaultValues;
 import com.example.edvardsen.quick.R;
@@ -143,10 +147,33 @@ public class IO {
             } else {
                 cardView.setId(View.generateViewId());
             }
+
+            final String room = rooms[i];
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    User.setCurrentRoom(room);
+                    IO.getSocket().emit("privateenter", User.getCurrentRoom()); //TODO: CONSIDER GATHERING EVENT NAMES IN CLASS!
+                    Intent intent = new Intent(view.getContext(), ChatActivity.class);
+                    intent.putExtra(DefaultValues.roomType, DefaultValues.roomTypePrivate);
+                    view.getContext().startActivity(intent);
+                }
+            });
+
             View child = cardView.getChildAt(0);
             ViewGroup cardChildren = (ViewGroup) child;
+
             TextView textView = (TextView) cardChildren.getChildAt(0);
             textView.setText(rooms[i]);
+
+            ImageButton imageButton = (ImageButton) cardChildren.getChildAt(2);
+            imageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    IO.getSocket().emit("privateleave", room); //TODO: MAKE THIS EVENT.
+                }
+            });
+
             params.setMargins(8, 8, 8, 8);
             cardView.setLayoutParams(params);
             cardMenuLayout.addView(cardView);
