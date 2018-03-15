@@ -170,7 +170,7 @@ public class IO {
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    IO.getSocket().emit("privateleave", room); //TODO: MAKE THIS EVENT.
+                    IO.getSocket().emit("privateleave", room, User.getUserID()); //TODO: MAKE THIS EVENT.
                 }
             });
 
