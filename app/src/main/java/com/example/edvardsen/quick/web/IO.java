@@ -139,7 +139,7 @@ public class IO {
     private static void setRooms(String[] rooms){
         for (int i = 0; i < rooms.length; i++) {
             LayoutInflater inflater = LayoutInflater.from(activity);
-            CardView cardView = (CardView) inflater.inflate(R.layout.card_view, null, false);
+            final CardView cardView = (CardView) inflater.inflate(R.layout.card_view, null, false);
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             if (view != null) {
                 params.addRule(RelativeLayout.BELOW, view.getId());
@@ -170,7 +170,9 @@ public class IO {
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    IO.getSocket().emit("privateleave", room, User.getUserID()); //TODO: MAKE THIS EVENT.
+                    IO.getSocket().emit("privateleave", room, User.getUserID());
+                    cardMenuLayout.removeView(cardView);
+                    //TODO: SAFE DELETE
                 }
             });
 

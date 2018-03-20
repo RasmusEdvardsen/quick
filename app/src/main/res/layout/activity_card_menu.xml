@@ -16,8 +16,7 @@
             android:text="@string/activity_card_menu_private"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
-            android:textColor="@color/colorWhite"
-            android:onClick="show_private_rooms"/>
+            android:textColor="@color/colorWhite"/> <!--android:onClick="show_private_rooms"-->
         <View
             android:layout_width="4dp"
             android:layout_height="match_parent"
@@ -29,14 +28,14 @@
             android:text="@string/activity_card_menu_public"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
-            android:textColor="@color/colorWhite"
-            android:onClick="show_public_rooms"/>
+            android:textColor="@color/colorWhite"/> <!--android:onClick="show_public_rooms"-->
     </android.support.v7.widget.LinearLayoutCompat>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_below="@id/card_menu_linear_layout_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/card_menu_create_room"
         android:id="@+id/cardMenuScrollView">
 
             <RelativeLayout
@@ -50,26 +49,27 @@
     </ScrollView>
 
     <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/card_menu_create_room"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:layout_alignParentBottom="true">
-        <EditText
-            android:id="@+id/message_field_message"
+        <android.support.v4.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColorHint="#CFD8DC"
-            android:textColor="#CFD8DC"
-            android:hint="roomname@otherclient"/>
-
+            android:layout_height="match_parent"
+            android:layout_weight="2"/>
         <ImageView
             android:id="@+id/message_field_send_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
+            android:layout_weight="3"
             android:padding="4dp"
-            android:src="@android:drawable/ic_menu_send"/>
+            android:src="@android:drawable/ic_input_add"
+            android:onClick="create_room_fragment"/>
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"/>
     </android.support.v7.widget.LinearLayoutCompat>
 
 </RelativeLayout>

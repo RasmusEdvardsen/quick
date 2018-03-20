@@ -34,6 +34,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //TODO: EMPTY ROOM MENU CARD ON SIGNUP
+        //TODO: IT'S BECAUSE OF THE USER ROOM THAT HOLDS THE ID
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
